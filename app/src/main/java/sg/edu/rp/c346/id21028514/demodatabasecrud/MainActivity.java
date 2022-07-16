@@ -18,12 +18,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     Button btnAdd, btnRetrieve;
-    TextView tvDBContent;
     EditText etContent;
     EditText etContent2;
+    EditText etContent3;
     ArrayList<Note> al;
     ListView lv;
     ArrayAdapter<Note> aa;
+    Note data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         lv = findViewById(R.id.lv);
         etContent = findViewById(R.id.etContent);
         etContent2 = findViewById(R.id.etContent2);
+        etContent3 = findViewById(R.id.etContent3);
+        Intent i = getIntent();
+        data = (Note) i.getSerializableExtra("data");
 
 
         al = new ArrayList<Note>();
@@ -46,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String data = etContent.getText().toString() + etContent2.getText().toString();
+                String data  = etContent.getText().toString();
+                String data1 = etContent2.getText().toString();
+                String data2 = etContent3.getText().toString();
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long inserted_id = dbh.insertNote(data);
+                long inserted_id = dbh.insertNote(data,data1,data2);
 
                 if (inserted_id != -1){
                     al.clear();
@@ -56,14 +62,18 @@ public class MainActivity extends AppCompatActivity {
                     aa.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this, "Insert successful",
                             Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Insert failed",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
         btnRetrieve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, pepe2.class);
-                startActivity(intent);
+
+                Intent i = new Intent(MainActivity.this, pepe2.class);
+                startActivity(i);
 
             }
         });
@@ -84,8 +94,6 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(i);
 //            }
 //        });
-
-
 
     }
 

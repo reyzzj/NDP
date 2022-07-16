@@ -19,6 +19,7 @@ public class pepe2 extends AppCompatActivity {
     TextView tvDBContent;
     EditText etContent;
     EditText etContent2;
+    EditText etContent3;
     ListView lv;
     ArrayList<Note> al;
     ArrayAdapter<Note> aa;
@@ -36,15 +37,17 @@ public class pepe2 extends AppCompatActivity {
         btnRetrieve = findViewById(R.id.btnRetrieve);
         etContent = findViewById(R.id.etContent);
         etContent2 = findViewById(R.id.etContent2);
+        etContent3 = findViewById(R.id.etContent3);
 
         lv = findViewById(R.id.lv);
+        al = new ArrayList<Note>();
         aa = new ArrayAdapter<Note>(this, android.R.layout.simple_list_item_1, al);
         lv.setAdapter(aa);
 
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int
-                    position, long identity) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long identity) {
                 Note data = al.get(position);
                 Intent i = new Intent(pepe2.this, EditActivity.class);
                 i.putExtra("data", data);
@@ -52,5 +55,19 @@ public class pepe2 extends AppCompatActivity {
             }
         });
 
+
+    }
+    @Override
+    protected void onResume() {
+    super.onResume();
+        DBHelper dbh = new DBHelper(pepe2.this);
+        al.clear();
+        al.addAll(dbh.getAllNotes());
+        aa.notifyDataSetChanged();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

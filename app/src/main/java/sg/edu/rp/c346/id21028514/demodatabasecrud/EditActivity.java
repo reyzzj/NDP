@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EditActivity extends AppCompatActivity {
 
     TextView tvID;
-    EditText etContent, etContent2;
+    EditText etContent, etContent2, etContent3;
     Button btnUpdate, btnDelete;
     Note data;
+    Note data1;
+    Note data2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,33 +28,37 @@ public class EditActivity extends AppCompatActivity {
         tvID = findViewById(R.id.tvID);
         etContent = findViewById(R.id.etContent);
         etContent2 = findViewById(R.id.etContent2);
+        etContent3 = findViewById(R.id.etContent3);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
 
         Intent i = getIntent();
         data = (Note) i.getSerializableExtra("data");
+        data1 = (Note) i.getSerializableExtra("data1");
 
         tvID.setText("ID: " + data.getId());
         etContent.setText(data.getNoteContent());
-        etContent2.setText(data.getNoteContent());
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBHelper dbh = new DBHelper(EditActivity.this);
-                data.setNoteContent(etContent.getText().toString());
-                dbh.updateNote(data);
-                dbh.close();
-                finish();
-            }
-        });
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBHelper dbh = new DBHelper(EditActivity.this);
-                dbh.deleteNote(data.getId());
-                finish();
-
-            }
-        });
+        etContent2.setText(data1.getNoteContent());
+        etContent3.setText(data2.getNoteContent());
+//        btnUpdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DBHelper dbh = new DBHelper(EditActivity.this);
+//                data.setNoteContent(etContent.getText().toString());
+//                data1.setNoteContent(etContent2.getText().toString());
+//                dbh.updateNote(data,data1);
+//                dbh.close();
+//                finish();
+//            }
+//        });
+//        btnDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DBHelper dbh = new DBHelper(EditActivity.this);
+//                dbh.deleteNote(data.getId());
+//                finish();
+//
+//            }
+//        });
     }
 }
