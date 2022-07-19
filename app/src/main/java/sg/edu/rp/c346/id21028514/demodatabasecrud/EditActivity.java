@@ -40,25 +40,26 @@ public class EditActivity extends AppCompatActivity {
         etContent.setText(data.getNoteContent());
         etContent2.setText(data1.getNoteContent());
         etContent3.setText(data2.getNoteContent());
-//        btnUpdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DBHelper dbh = new DBHelper(EditActivity.this);
-//                data.setNoteContent(etContent.getText().toString());
-//                data1.setNoteContent(etContent2.getText().toString());
-//                dbh.updateNote(data,data1);
-//                dbh.close();
-//                finish();
-//            }
-//        });
-//        btnDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DBHelper dbh = new DBHelper(EditActivity.this);
-//                dbh.deleteNote(data.getId());
-//                finish();
-//
-//            }
-//        });
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbh = new DBHelper(EditActivity.this);
+                data.setNoteContent(etContent.getText().toString());
+                data1.setNoteContent(etContent2.getText().toString());
+                dbh.updateNote(data);
+                dbh.updateNote(data1);
+                dbh.close();
+                finish();
+            }
+        });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbh = new DBHelper(EditActivity.this);
+                dbh.deleteNote(data.getId());
+                finish();
+
+            }
+        });
     }
 }

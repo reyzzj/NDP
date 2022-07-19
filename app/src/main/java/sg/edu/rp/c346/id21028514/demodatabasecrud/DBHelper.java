@@ -18,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String COLUMN_NOTE_CONTENT = "note_content";
     private static final String COLUMN_NOTE_CONTENT2 = "note_content2";
     private static final String COLUMN_NOTE_CONTENT3 = "note_content3";
+    private static final String COLUMN_NOTE_CONTENT4 = "note_content4";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,7 +30,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_NOTE_CONTENT + " TEXT,"
                 + COLUMN_NOTE_CONTENT2 + " TEXT2,"
-                + COLUMN_NOTE_CONTENT3 + " TEXT3 )";
+                + COLUMN_NOTE_CONTENT3 + " TEXT3,"
+                + COLUMN_NOTE_CONTENT4 + " TEXT4 )";
 
         db.execSQL(createNoteTableSql);
     }
@@ -43,14 +45,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN  module_name TEXT ");
         db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN  module_name TEXT2 ");
         db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN  module_name TEXT3 ");
+        db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN  module_name TEXT4 ");
     }
 
-    public long insertNote(String noteContent,String noteContent2,String noteContent3) {
+    public long insertNote(String noteContent,String noteContent2,String noteContent3,String noteContent4) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOTE_CONTENT, noteContent);
         values.put(COLUMN_NOTE_CONTENT2, noteContent2);
         values.put(COLUMN_NOTE_CONTENT3, noteContent3);
+        values.put(COLUMN_NOTE_CONTENT4, noteContent4);
         long result = db.insert(TABLE_NOTE, null, values);
         db.close();
         Log.d("SQL Insert","ID:"+ result); //id returned, shouldn’t be -1
@@ -61,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns= {COLUMN_ID, COLUMN_NOTE_CONTENT, COLUMN_NOTE_CONTENT2,COLUMN_NOTE_CONTENT3};
+        String[] columns= {COLUMN_ID, COLUMN_NOTE_CONTENT, COLUMN_NOTE_CONTENT2,COLUMN_NOTE_CONTENT3, COLUMN_NOTE_CONTENT4};
         Cursor cursor = db.query(TABLE_NOTE, columns, null, null,
                 null, null, null, null);
 
@@ -71,7 +75,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 String noteContent = cursor.getString(1);
                 String noteContent2 = cursor.getString(2);
                 String noteContent3 = cursor.getString(3);
-                Note note = new Note(id, noteContent, noteContent2, noteContent3);
+                String noteContent4 = cursor.getString(4);
+                Note note = new Note(id, noteContent, noteContent2, noteContent3, noteContent4);
                 notes.add(note);
             } while (cursor.moveToNext());
         }
@@ -79,23 +84,26 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return notes;
     }
-//    public int updateNote(Note data){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(COLUMN_NOTE_CONTENT, data.getNoteContent());
-//        String condition = COLUMN_ID + "= ?";
-//        String[] args = {String.valueOf(data.getId())};
-//        int result = db.update(TABLE_NOTE, values, condition, args);
-//        db.close();
-//        return result;
-//    }
-//    public int deleteNote(int id){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        String condition = COLUMN_ID + "= ?";
-//        String[] args = {String.valueOf(id)};
-//        int result = db.delete(TABLE_NOTE, condition, args);
-//        db.close();
-//        return result;
-//    }
+    public int updateNote(Note data, Note data1,Note data2,Note data3){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NOTE_CONTENT, data.getNoteContent()
+                ,COLUMN_NOTE_CONTENT2 , data1.getNoteContent2()
+                ,COLUMN_NOTE_CONTENT3 , data2.getNoteContent3()
+                ,COLUMN_NOTE_CONTENT3 , data3.getNoteContent4());
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(data.getId())};
+        int result = db.update(TABLE_NOTE, values, condition, args);
+        db.close();
+        return result;
+    }
+    public int deleteNote(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String condition = COLUMN_ID + "= ?";
+        String[] args = {String.valueOf(id)};
+        int result = db.delete(TABLE_NOTE, condition, args);
+        db.close();
+        return result;
+    }
 
 }

@@ -8,12 +8,14 @@ public class Note implements Serializable {
     private 	String noteContent;
     private     String noteContent2;
     private     String noteContent3;
+    private     String noteContent4;
 
-    public Note(int id, String noteContent, String noteContent2, String noteContent3) {
+    public Note(int id, String noteContent, String noteContent2, String noteContent3,String noteContent4) {
         this.id = id;
         this.noteContent = noteContent;
         this.noteContent2 = noteContent2;
         this.noteContent3 = noteContent3;
+        this.noteContent4 = noteContent4;
     }
 
     public int getId() {  return id;  }
@@ -21,6 +23,7 @@ public class Note implements Serializable {
     public String getNoteContent() { return noteContent; }
     public String getNoteContent2() { return noteContent2; }
     public String getNoteContent3() { return noteContent3; }
+    public String getNoteContent4() { return noteContent4; }
 
     public void setNoteContent(String noteContent) {
         this.noteContent = noteContent;
@@ -31,6 +34,9 @@ public class Note implements Serializable {
     public void setNoteContent3(String noteContent3) {
         this.noteContent3 = noteContent3;
     }
+    public void setNoteContent4(String noteContent4) {
+        this.noteContent4 = noteContent4;
+    }
 
     @Override
     public String toString() { return
@@ -38,9 +44,14 @@ public class Note implements Serializable {
             +"\n"
             +"Song Title: "  + noteContent2
             +"\n"
-            +"Song Year: "  + noteContent3;
+            +"Song Year: "  + noteContent3
             +"\n"
-            +"Song Star: "  + noteContent4;}
+            + noteContent4;
+
+
+
+
+    }
 
 }
 

@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     EditText etContent2;
     EditText etContent3;
     ArrayList<Note> al;
+    RadioGroup rgContent;
+    RadioButton star1,star2,star3,star4,star5;
     ListView lv;
     ArrayAdapter<Note> aa;
     Note data;
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         etContent = findViewById(R.id.etContent);
         etContent2 = findViewById(R.id.etContent2);
         etContent3 = findViewById(R.id.etContent3);
+        rgContent = findViewById(R.id.groupradio);
         Intent i = getIntent();
         data = (Note) i.getSerializableExtra("data");
 
@@ -53,8 +58,26 @@ public class MainActivity extends AppCompatActivity {
                 String data  = etContent.getText().toString();
                 String data1 = etContent2.getText().toString();
                 String data2 = etContent3.getText().toString();
+                int star = rgContent.getCheckedRadioButtonId();
+                String data3 = "0";
+
+
+                if(star == R.id.radioButton1) {
+                    data3 = "1";
+                } else if(star == R.id.radioButton2) {
+                    data3 = "2";
+                } else if(star == R.id.radioButton3) {
+                    data3 = "3";
+                } else if(star == R.id.radioButton4) {
+                    data3 = "4";
+                } else if(star == R.id.radioButton5) {
+                    data3 = "5";
+                } else {
+                    Toast.makeText(MainActivity.this, "Wrong star",
+                            Toast.LENGTH_SHORT).show();
+                }
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long inserted_id = dbh.insertNote(data,data1,data2);
+                long inserted_id = dbh.insertNote(data,data1,data2,data3);
 
                 if (inserted_id != -1){
                     al.clear();
