@@ -84,13 +84,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return notes;
     }
-    public int updateNote(Note data, Note data1,Note data2,Note data3){
+    public int updateNote(Note data, Note data1,Note data2,String data3){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NOTE_CONTENT, data.getNoteContent()
-                ,COLUMN_NOTE_CONTENT2 , data1.getNoteContent2()
-                ,COLUMN_NOTE_CONTENT3 , data2.getNoteContent3()
-                ,COLUMN_NOTE_CONTENT3 , data3.getNoteContent4());
+        values.put(COLUMN_NOTE_CONTENT, data.getNoteContent());
+        values.put(COLUMN_NOTE_CONTENT2 , data1.getNoteContent2());
+        values.put(COLUMN_NOTE_CONTENT3 , data1.getNoteContent3());
+        values.put(COLUMN_NOTE_CONTENT4 , data1.getNoteContent4());
         String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};
         int result = db.update(TABLE_NOTE, values, condition, args);

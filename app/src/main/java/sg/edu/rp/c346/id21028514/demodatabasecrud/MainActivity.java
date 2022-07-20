@@ -59,19 +59,18 @@ public class MainActivity extends AppCompatActivity {
                 String data1 = etContent2.getText().toString();
                 String data2 = etContent3.getText().toString();
                 int star = rgContent.getCheckedRadioButtonId();
-                String data3 = "0";
-
+                String data3 = "empty";
 
                 if(star == R.id.radioButton1) {
-                    data3 = "1";
+                    data3 = "radioButton1";
                 } else if(star == R.id.radioButton2) {
-                    data3 = "2";
+                    data3 = "radioButton2";
                 } else if(star == R.id.radioButton3) {
-                    data3 = "3";
+                    data3 = "radioButton3";
                 } else if(star == R.id.radioButton4) {
-                    data3 = "4";
+                    data3 = "radioButton4";
                 } else if(star == R.id.radioButton5) {
-                    data3 = "5";
+                    data3 = "radioButton5";
                 } else {
                     Toast.makeText(MainActivity.this, "Wrong star",
                             Toast.LENGTH_SHORT).show();

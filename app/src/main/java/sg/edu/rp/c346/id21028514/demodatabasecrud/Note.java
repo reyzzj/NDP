@@ -34,9 +34,7 @@ public class Note implements Serializable {
     public void setNoteContent3(String noteContent3) {
         this.noteContent3 = noteContent3;
     }
-    public void setNoteContent4(String noteContent4) {
-        this.noteContent4 = noteContent4;
-    }
+    public void setNoteContent4(String noteContent4) { this.noteContent4 = noteContent4; }
 
     @Override
     public String toString() { return
@@ -47,10 +45,6 @@ public class Note implements Serializable {
             +"Song Year: "  + noteContent3
             +"\n"
             + noteContent4;
-
-
-
-
     }
 
 }
