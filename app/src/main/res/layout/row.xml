@@ -9,7 +9,9 @@
         android:id="@+id/tvSong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#AC17EB"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#D2FFB0"
         android:text="aaaaaaaa" />
 
     <LinearLayout
@@ -21,7 +23,10 @@
             android:id="@+id/tvYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:gravity="bottom"
             android:layout_marginRight="20dp"
+            android:textStyle="bold"
             android:text="aaaaaaaaaaaa"
             android:textColor="#AEEB0C" />
 
@@ -62,7 +67,9 @@
         android:id="@+id/tvSinger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#D7DCED"
-        android:text="aaaaaaaaaaa" />
+        android:textColor="#C9D1FF"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:text="filler" />
 
 </LinearLayout>
