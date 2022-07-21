@@ -62,6 +62,9 @@ public class pepe2 extends AppCompatActivity {
         adapter = new CustomAdapter(this, R.layout.row, al);
         lv.setAdapter(adapter);
 
+
+
+
         btnShow5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

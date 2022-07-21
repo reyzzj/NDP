@@ -58,6 +58,19 @@ public class MainActivity extends AppCompatActivity {
         aa = new ArrayAdapter<Note>(this,
                 android.R.layout.simple_list_item_1, al);
         lv.setAdapter(aa);
+//        public void onClick(View star1) {
+//            //Set the button's appearance
+//            if (star1.isSelected()) {
+//                //Handle selected state change
+//                android:(R.id.radioButton1)="@drawable/star_uncfm"
+//            }
+//            else {
+//                //Handle de-select state change
+//            }
+//
+//        }
+//
+//    });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,29 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 int data3 = rgContent.getCheckedRadioButtonId();
                 rb = findViewById(data3);
                 int rating = Integer.parseInt(rb.getText().toString());
-                Log.d("result",rating+"");
-
-                Log.d("result",data3+"");
-//                String data3 = "";
-//
-//                if(star == R.id.radioButton1) {
-//
-//                    data3 = "*";
-//                } else if(star == R.id.radioButton2) {
-//                    data3 = "**";
-//                } else if(star == R.id.radioButton3) {
-//                    data3 = "***";
-//                } else if(star == R.id.radioButton4) {
-//                    data3 = "****";
-//                } else if(star == R.id.radioButton5) {
-//                    data3 = "*****";
-//                } else {
-//                    Toast.makeText(MainActivity.this, "Wrong star",
-//                            Toast.LENGTH_SHORT).show();
-//                }
                 DBHelper dbh = new DBHelper(MainActivity.this);
                 long inserted_id = dbh.insertNote(data,data1,data2,rating);
-
                 if (inserted_id != -1){
                     Toast.makeText(MainActivity.this, "Insert successful",
                             Toast.LENGTH_SHORT).show();

@@ -2,19 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/red_glitter_bg">
 
     <TextView
         android:id="@+id/tvID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:fontFamily="@font/black_and_white_picture"
+        android:textSize="24dp"
+        android:text="TextView"
+        android:textColor="@color/soft_blue"/>
 
     <TextView
         android:id="@+id/tvContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Song title" />
+        android:fontFamily="@font/black_and_white_picture"
+        android:textSize="24dp"
+        android:text="Song title"
+        android:textColor="@color/soft_blue"/>
 
     <EditText
         android:id="@+id/etEditContent"
@@ -22,12 +29,18 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColorHint="@color/soft_blue"
+        android:textColor="@color/soft_blue"
+        android:backgroundTint="@color/soft_blue"
         />
     <TextView
         android:id="@+id/tvContent2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter Singer' name" />
+        android:fontFamily="@font/black_and_white_picture"
+        android:textSize="24dp"
+        android:text="Enter Singer' name"
+        android:textColor="@color/soft_blue"/>
 
     <EditText
         android:id="@+id/etEditContent2"
@@ -35,13 +48,19 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColorHint="@color/soft_blue"
+        android:textColor="@color/soft_blue"
+        android:backgroundTint="@color/soft_blue"
         />
 
     <TextView
         android:id="@+id/tvContent3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:fontFamily="@font/black_and_white_picture"
+        android:textSize="24dp"
+        android:text="Enter Year"
+        android:textColor="@color/soft_blue"/>
 
     <EditText
         android:id="@+id/etEditContent3"
@@ -49,13 +68,19 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColorHint="@color/soft_blue"
+        android:textColor="@color/soft_blue"
+        android:backgroundTint="@color/soft_blue"
         />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Stars" />
+        android:fontFamily="@font/black_and_white_picture"
+        android:textSize="24dp"
+        android:text="Stars"
+        android:textColor="@color/soft_blue"/>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -67,31 +92,41 @@
                 android:id="@+id/radioEditButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1" />
+                android:text="1"
+                android:button="@drawable/star_uncfm"
+                android:textSize="0dp"/>
 
             <RadioButton
                 android:id="@+id/radioEditButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2" />
+                android:text="2"
+                android:button="@drawable/star_uncfm"
+                android:textSize="0dp"/>
 
             <RadioButton
                 android:id="@+id/radioEditButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3" />
+                android:text="3"
+                android:button="@drawable/star_uncfm"
+                android:textSize="0dp"/>
 
             <RadioButton
                 android:id="@+id/radioEditButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4" />
+                android:text="4"
+                android:button="@drawable/star_uncfm"
+                android:textSize="0dp"/>
 
             <RadioButton
                 android:id="@+id/radioEditButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5" />
+                android:text="5"
+                android:button="@drawable/star_uncfm"
+                android:textSize="0dp"/>
 
     </RadioGroup>
 
