@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_NOTE_CONTENT + " TEXT,"
                 + COLUMN_NOTE_CONTENT2 + " TEXT2,"
                 + COLUMN_NOTE_CONTENT3 + " TEXT3,"
-                + COLUMN_NOTE_CONTENT4 + " TEXT4 )";
+                + COLUMN_NOTE_CONTENT4 + " INTEGER )";
 
         db.execSQL(createNoteTableSql);
     }
@@ -48,7 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("ALTER TABLE " + TABLE_NOTE + " ADD COLUMN  module_name TEXT4 ");
     }
 
-    public long insertNote(String noteContent,String noteContent2,String noteContent3,String noteContent4) {
+    public long insertNote(String noteContent, String noteContent2, String noteContent3, int noteContent4) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOTE_CONTENT, noteContent);
@@ -75,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 String noteContent = cursor.getString(1);
                 String noteContent2 = cursor.getString(2);
                 String noteContent3 = cursor.getString(3);
-                String noteContent4 = cursor.getString(4);
+                int noteContent4 = cursor.getInt(4);
                 Note note = new Note(id, noteContent, noteContent2, noteContent3, noteContent4);
                 notes.add(note);
             } while (cursor.moveToNext());
@@ -84,13 +84,38 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return notes;
     }
-    public int updateNote(Note data, Note data1,Note data2,String data3){
+
+    public ArrayList<Note> getAll5StarSongs() {
+        ArrayList<Note> notes = new ArrayList<Note>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns= {COLUMN_ID, COLUMN_NOTE_CONTENT, COLUMN_NOTE_CONTENT2, COLUMN_NOTE_CONTENT3, COLUMN_NOTE_CONTENT4};
+        String condition = COLUMN_NOTE_CONTENT4 + " Like ?";
+        String[] args = { "%" + 5  + "%"};
+        Cursor cursor = db.query(TABLE_NOTE, columns, condition, args,null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String noteContent = cursor.getString(1);
+                String noteContent2 = cursor.getString(2);
+                String noteContent3 = cursor.getString(3);
+                int noteContent4 = cursor.getInt(4);
+                Note note = new Note(id, noteContent, noteContent2, noteContent3, noteContent4);
+                notes.add(note);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return notes;
+    }
+    public int updateNote(Note data){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NOTE_CONTENT, data.getNoteContent());
-        values.put(COLUMN_NOTE_CONTENT2 , data1.getNoteContent2());
-        values.put(COLUMN_NOTE_CONTENT3 , data1.getNoteContent3());
-        values.put(COLUMN_NOTE_CONTENT4 , data1.getNoteContent4());
+        values.put(COLUMN_NOTE_CONTENT2 , data.getNoteContent2());
+        values.put(COLUMN_NOTE_CONTENT3 , data.getNoteContent3());
+        values.put(COLUMN_NOTE_CONTENT4 , data.getNoteContent4());
         String condition = COLUMN_ID + "= ?";
         String[] args = {String.valueOf(data.getId())};
         int result = db.update(TABLE_NOTE, values, condition, args);

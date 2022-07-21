@@ -14,10 +14,10 @@
         android:id="@+id/tvContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title" />
+        android:text="Song title" />
 
     <EditText
-        android:id="@+id/etContent"
+        android:id="@+id/etEditContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -27,10 +27,10 @@
         android:id="@+id/tvContent2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title" />
+        android:text="Enter Singer' name" />
 
     <EditText
-        android:id="@+id/etContent2"
+        android:id="@+id/etEditContent2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -41,10 +41,10 @@
         android:id="@+id/tvContent3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title" />
+        android:text="" />
 
     <EditText
-        android:id="@+id/etContent3"
+        android:id="@+id/etEditContent3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -60,12 +60,8 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rgEditContent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+        android:id="@+id/rgEditContent"
+        android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioEditButton1"
@@ -96,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
-        </LinearLayout>
+
     </RadioGroup>
 
     <Button

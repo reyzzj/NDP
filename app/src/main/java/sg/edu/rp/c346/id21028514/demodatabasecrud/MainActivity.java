@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     EditText etContent3;
     ArrayList<Note> al;
     RadioGroup rgContent;
-    RadioButton star1,star2,star3,star4,star5;
+    RadioButton rb,star1,star2,star3,star4,star5;
     ListView lv;
     ArrayAdapter<Note> aa;
     Note data;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //initialize the variables with UI here
         btnAdd = findViewById(R.id.btnAdd);
         btnRetrieve = findViewById(R.id.btnRetrieve);
@@ -43,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
         etContent2 = findViewById(R.id.etContent2);
         etContent3 = findViewById(R.id.etContent3);
         rgContent = findViewById(R.id.groupradio);
+        star1 = findViewById(R.id.radioButton1);
+        star2 = findViewById(R.id.radioButton2);
+        star3 = findViewById(R.id.radioButton3);
+        star4 = findViewById(R.id.radioButton4);
+        star5 = findViewById(R.id.radioButton5);
         Intent i = getIntent();
         data = (Note) i.getSerializableExtra("data");
 
@@ -58,30 +65,33 @@ public class MainActivity extends AppCompatActivity {
                 String data  = etContent.getText().toString();
                 String data1 = etContent2.getText().toString();
                 String data2 = etContent3.getText().toString();
-                int star = rgContent.getCheckedRadioButtonId();
-                String data3 = "empty";
+                int data3 = rgContent.getCheckedRadioButtonId();
+                rb = findViewById(data3);
+                int rating = Integer.parseInt(rb.getText().toString());
+                Log.d("result",rating+"");
 
-                if(star == R.id.radioButton1) {
-                    data3 = "radioButton1";
-                } else if(star == R.id.radioButton2) {
-                    data3 = "radioButton2";
-                } else if(star == R.id.radioButton3) {
-                    data3 = "radioButton3";
-                } else if(star == R.id.radioButton4) {
-                    data3 = "radioButton4";
-                } else if(star == R.id.radioButton5) {
-                    data3 = "radioButton5";
-                } else {
-                    Toast.makeText(MainActivity.this, "Wrong star",
-                            Toast.LENGTH_SHORT).show();
-                }
+                Log.d("result",data3+"");
+//                String data3 = "";
+//
+//                if(star == R.id.radioButton1) {
+//
+//                    data3 = "*";
+//                } else if(star == R.id.radioButton2) {
+//                    data3 = "**";
+//                } else if(star == R.id.radioButton3) {
+//                    data3 = "***";
+//                } else if(star == R.id.radioButton4) {
+//                    data3 = "****";
+//                } else if(star == R.id.radioButton5) {
+//                    data3 = "*****";
+//                } else {
+//                    Toast.makeText(MainActivity.this, "Wrong star",
+//                            Toast.LENGTH_SHORT).show();
+//                }
                 DBHelper dbh = new DBHelper(MainActivity.this);
-                long inserted_id = dbh.insertNote(data,data1,data2,data3);
+                long inserted_id = dbh.insertNote(data,data1,data2,rating);
 
                 if (inserted_id != -1){
-                    al.clear();
-                    al.addAll(dbh.getAllNotes());
-                    aa.notifyDataSetChanged();
                     Toast.makeText(MainActivity.this, "Insert successful",
                             Toast.LENGTH_SHORT).show();
                 } else {
@@ -99,24 +109,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-//        lv = findViewById(R.id.lv);
-//        aa = new ArrayAdapter<Note>(this,
-//                android.R.layout.simple_list_item_1, al);
-//        lv.setAdapter(aa);
-//
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int
-//                    position, long identity) {
-//                Note data = al.get(position);
-//                Intent i = new Intent(MainActivity.this,
-//                        EditActivity.class);
-//                i.putExtra("data", data);
-//                startActivity(i);
-//            }
-//        });
-
     }
-
 }

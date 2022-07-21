@@ -2,9 +2,11 @@ package sg.edu.rp.c346.id21028514.demodatabasecrud;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,12 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EditActivity extends AppCompatActivity {
 
     TextView tvID;
-    EditText etContent, etContent2, etContent3;
+    EditText etEditContent, etEditContent2, etEditContent3;
     Button btnUpdate, btnDelete, btnCancel;
+    RadioButton rbEdit,starEdit1,starEdit2,starEdit3,starEdit4,starEdit5;
     RadioGroup rgEditContent;
     Note data;
-    Note data1;
-    Note data2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,45 +30,63 @@ public class EditActivity extends AppCompatActivity {
         //initialize the variables with UI here
 
         tvID = findViewById(R.id.tvID);
-        etContent = findViewById(R.id.etContent);
-        etContent2 = findViewById(R.id.etContent2);
-        etContent3 = findViewById(R.id.etContent3);
+        etEditContent = findViewById(R.id.etEditContent);
+        etEditContent2 = findViewById(R.id.etEditContent2);
+        etEditContent3 = findViewById(R.id.etEditContent3);
+
+        starEdit1 = findViewById(R.id.radioButton1);
+        starEdit2 = findViewById(R.id.radioButton2);
+        starEdit3 = findViewById(R.id.radioButton3);
+        starEdit4 = findViewById(R.id.radioButton4);
+        starEdit5 = findViewById(R.id.radioButton5);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
         btnCancel = findViewById(R.id.btnCancel);
+
         rgEditContent = findViewById(R.id.rgEditContent);
+
 
         Intent i = getIntent();
         data = (Note) i.getSerializableExtra("data");
-        data1 = (Note) i.getSerializableExtra("data1");
-        data2 = (Note) i.getSerializableExtra("data2");
+
+        etEditContent.setText(data.getNoteContent());
+        etEditContent2.setText(data.getNoteContent2());
+        etEditContent3.setText(data.getNoteContent3());
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(EditActivity.this);
-                data.setNoteContent(etContent.getText().toString());
-                data1.setNoteContent2(etContent2.getText().toString());
-                data2.setNoteContent3(etContent3.getText().toString());
-                int star = rgEditContent.getCheckedRadioButtonId();
-                String data3 = "empty";
+                data.setNoteContent(etEditContent.getText().toString());
+                data.setNoteContent2(etEditContent2.getText().toString());
+                data.setNoteContent3(etEditContent3.getText().toString());
+                int data3 = rgEditContent.getCheckedRadioButtonId();
+                rbEdit = findViewById(data3);
+                int rating = Integer.parseInt(rbEdit.getText().toString());
+                Log.d("result",rating+"");
 
-                if(star == R.id.radioButton1) {
-                    data3 = "radioButton1";
-                } else if(star == R.id.radioButton2) {
-                    data3 = "radioButton2";
-                } else if(star == R.id.radioButton3) {
-                    data3 = "radioButton3";
-                } else if(star == R.id.radioButton4) {
-                    data3 = "radioButton4";
-                } else if(star == R.id.radioButton5) {
-                    data3 = "radioButton5";
-                } else {
-                    Toast.makeText(EditActivity.this, "Wrong star",
-                            Toast.LENGTH_SHORT).show();
-                }
+                Log.d("result",data3+"");
+//                int star = rgEditContent.getCheckedRadioButtonId();
+//                String radio = "";
+//
+//                if(star == R.id.radioEditButton1) {
+//                    radio = "*";
+//                } else if(star == R.id.radioEditButton2) {
+//                    radio = "**";
+//                } else if(star == R.id.radioEditButton3) {
+//                    radio = "***";
+//                } else if(star == R.id.radioEditButton4) {
+//                    radio = "****";
+//                } else if(star == R.id.radioEditButton5) {
+//                    radio = "*****";
+//                } else {
+//                    Toast.makeText(EditActivity.this, "Wrong star",
+//                            Toast.LENGTH_SHORT).show();
+//                }
 
-                dbh.updateNote(data,data1,data2,data3);
+                data.setNoteContent4(rating);
+
+                dbh.updateNote(data);
                 dbh.close();
                 finish();
             }

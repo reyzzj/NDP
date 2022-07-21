@@ -11,7 +11,7 @@
         android:id="@+id/tvContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title" />
+        android:text="Song title: " />
 
     <EditText
         android:id="@+id/etContent"
@@ -24,7 +24,7 @@
         android:id="@+id/tvContent2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title" />
+        android:text="Singer name" />
 
     <EditText
         android:id="@+id/etContent2"
@@ -38,7 +38,7 @@
         android:id="@+id/tvContent3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title" />
+        android:text="Enter Year: " />
 
     <EditText
         android:id="@+id/etContent3"
@@ -113,7 +113,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:layout_weight="1"
-            android:text="retrieve" />
+            android:text="Show List" />
     </LinearLayout>
 
     <ListView
